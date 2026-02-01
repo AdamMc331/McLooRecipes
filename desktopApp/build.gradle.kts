@@ -20,7 +20,7 @@ kotlin {
 
 compose.desktop {
     application {
-        mainClass = "template.MainKt"
+        mainClass = "com.mcloo.recipes.MainKt"
 
         nativeDistributions {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)

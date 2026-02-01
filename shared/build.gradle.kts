@@ -6,8 +6,6 @@ import org.jmailen.gradle.kotlinter.tasks.LintTask
 
 plugins {
     alias(libs.plugins.android.kmp.library)
-    alias(libs.plugins.apollo.graphql)
-    alias(libs.plugins.cash.sqldelight)
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.kotlin.multiplatform)
@@ -19,7 +17,7 @@ kotlin {
         compileSdk = libs.versions.compileSdk.get().toInt()
         minSdk = libs.versions.minSdk.get().toInt()
 
-        namespace = "template.shared"
+        namespace = "com.mcloo.recipes.shared"
 
         @OptIn(ExperimentalKotlinGradlePluginApi::class)
         compilerOptions {
@@ -48,12 +46,8 @@ kotlin {
             implementation(compose.ui)
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
-            implementation(libs.androidx.datastore.preferences)
             implementation(libs.androidx.lifecycle.viewmodel)
             implementation(libs.androidx.lifecycle.runtime.compose)
-            implementation(libs.apollo.runtime)
-            implementation(libs.cash.sqldelight.coroutines)
-            implementation(libs.cash.sqldelight.runtime)
             implementation(libs.coil.compose)
             implementation(libs.coil.ktor)
             implementation(libs.compose.material3.adaptive)
@@ -66,12 +60,10 @@ kotlin {
         }
 
         androidMain.dependencies {
-            implementation(libs.cash.sqldelight.android.driver)
             implementation(libs.ktor.client.android)
         }
 
         iosMain.dependencies {
-            implementation(libs.cash.sqldelight.native.driver)
             implementation(libs.ktor.client.darwin)
         }
 
@@ -90,7 +82,7 @@ kotlin {
                             freeCompilerArgs.addAll(
                                 "-P",
                                 "plugin:org.jetbrains.kotlin.parcelize:additionalAnnotation" +
-                                    "=template.shared.Parcelize",
+                                    "=com.mcloo.recipes.shared.Parcelize",
                             )
                         }
                     }
@@ -102,23 +94,8 @@ kotlin {
 
 compose.resources {
     publicResClass = false
-    packageOfResClass = "template.shared"
+    packageOfResClass = "com.mcloo.recipes.shared"
     generateResClass = auto
-}
-
-sqldelight {
-    databases {
-        create("AppDatabase") {
-            packageName.set("template.shared")
-        }
-    }
-}
-
-// NOTE: Replace the template schema.json with the schema for your apollo api.
-apollo {
-    service("service") {
-        packageName.set("template.shared")
-    }
 }
 
 tasks.withType<FormatTask> {

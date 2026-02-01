@@ -12,7 +12,7 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-rootProject.name = "template"
+rootProject.name = "McLoo Recipes"
 include(":androidApp")
 include(":desktopApp")
 include(":shared")
