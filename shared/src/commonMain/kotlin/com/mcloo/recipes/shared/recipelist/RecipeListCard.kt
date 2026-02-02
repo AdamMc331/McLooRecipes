@@ -1,12 +1,13 @@
 package com.mcloo.recipes.shared.recipelist
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.History
 import androidx.compose.material3.Card
@@ -31,13 +32,14 @@ fun RecipeListCard(
     Card(
         modifier = modifier,
     ) {
-        Row {
+        Row(modifier = Modifier.height(IntrinsicSize.Min)) {
             ImageWrapper(
                 image = recipe.image,
                 contentDescription = null,
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
-                    .size(64.dp),
+                    .aspectRatio(1f)
+                    .fillMaxHeight(),
             )
 
             Column(
