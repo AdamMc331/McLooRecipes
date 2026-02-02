@@ -13,10 +13,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import com.mcloo.recipes.shared.ui.UiImage
 import com.mcloo.recipes.shared.ui.components.ImageWrapper
 import com.mcloo.recipes.shared.ui.theme.McLooTheme
-import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Preview
 @Composable
