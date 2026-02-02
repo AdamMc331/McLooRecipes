@@ -1,4 +1,4 @@
-package com.mcloo.recipes.shared
+package com.mcloo.recipes.shared.recipelist
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

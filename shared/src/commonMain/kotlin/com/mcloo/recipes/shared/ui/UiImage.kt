@@ -20,4 +20,9 @@ sealed interface UiImage {
     data class Local(
         val resource: DrawableResource,
     ) : UiImage
+
+    /**
+     * Used to represent an image that is not yet available.
+     */
+    data object Placeholder : UiImage
 }
