@@ -47,6 +47,7 @@ fun RecipeListContent(
 
 @Preview
 @Composable
+@Suppress("MagicNumber")
 fun RecipeListContentPreview() {
     val recipes = List(3) { index ->
         RecipeDisplayModel(
