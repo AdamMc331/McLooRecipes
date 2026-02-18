@@ -5,44 +5,42 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mcloo.recipes.shared.data.repositories.RecipeRepository
 import com.mcloo.recipes.shared.displaymodels.RecipeDisplayModel
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.distinctUntilChanged
-import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.flow.stateIn
 
+@OptIn(ExperimentalCoroutinesApi::class)
 class RecipeListViewModel(
     private val repository: RecipeRepository,
 ) : ViewModel() {
-    private val mutableState = MutableStateFlow(RecipeListUiState.default())
+    private val searchText = MutableStateFlow(TextFieldValue())
 
-    val state = mutableState.asStateFlow()
+    private val recipes = searchText
+        .map { it.text }
+        .distinctUntilChanged()
+        .flatMapLatest { query ->
+            repository.getRecipes(query)
+        }.map { recipes ->
+            recipes.map(::RecipeDisplayModel)
+        }
 
-    init {
-        state
-            .map { state ->
-                state.searchText
-            }.distinctUntilChanged()
-            .onEach { searchText ->
-                repository.getRecipes(searchText.text).collect { recipes ->
-                    val displayModels = recipes.map(::RecipeDisplayModel)
-
-                    mutableState.update { currentState ->
-                        currentState.copy(
-                            recipes = displayModels,
-                        )
-                    }
-                }
-            }.launchIn(viewModelScope)
-    }
+    val state = combine(searchText, recipes) { searchText, recipes ->
+        RecipeListUiState(
+            searchText = searchText,
+            recipes = recipes,
+        )
+    }.stateIn(
+        scope = viewModelScope,
+        started = SharingStarted.Lazily,
+        initialValue = RecipeListUiState.default(),
+    )
 
     fun onSearchTextChanged(searchText: TextFieldValue) {
-        mutableState.update { currentState ->
-            currentState.copy(
-                searchText = searchText,
-            )
-        }
+        this.searchText.value = searchText
     }
 }
