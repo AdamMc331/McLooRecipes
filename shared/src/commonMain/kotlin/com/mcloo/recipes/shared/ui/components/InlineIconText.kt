@@ -62,6 +62,7 @@ fun InlineIconText(
             icon = icon,
             showIcon = showIcon,
             iconTint = iconTint,
+            style = style,
         ),
         modifier = modifier,
         textAlign = textAlign,
@@ -103,6 +104,7 @@ private fun getInlineContent(
     icon: ImageVector,
     showIcon: Boolean,
     iconTint: Color,
+    style: TextStyle,
 ): Map<String, InlineTextContent> {
     return if (!showIcon) {
         emptyMap()
@@ -112,8 +114,8 @@ private fun getInlineContent(
                 INLINE_CONTENT_ID,
                 InlineTextContent(
                     Placeholder(
-                        width = LocalTextStyle.current.fontSize,
-                        height = LocalTextStyle.current.fontSize,
+                        width = style.fontSize,
+                        height = style.fontSize,
                         placeholderVerticalAlign = PlaceholderVerticalAlign.TextCenter,
                     ),
                 ) {
