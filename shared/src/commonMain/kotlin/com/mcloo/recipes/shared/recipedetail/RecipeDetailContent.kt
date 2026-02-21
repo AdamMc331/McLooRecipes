@@ -63,13 +63,6 @@ fun RecipeDetailContent(
 }
 
 @Composable
-private fun Duration(
-    state: RecipeDetailUiState,
-    modifier: Modifier = Modifier,
-) {
-}
-
-@Composable
 private fun NameDuration(
     state: RecipeDetailUiState,
     modifier: Modifier = Modifier,
