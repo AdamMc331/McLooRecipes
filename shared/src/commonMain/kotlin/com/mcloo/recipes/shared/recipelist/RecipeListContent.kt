@@ -1,11 +1,15 @@
 package com.mcloo.recipes.shared.recipelist
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.TextFieldValue
@@ -20,26 +24,31 @@ fun RecipeListContent(
     state: RecipeListUiState,
     modifier: Modifier = Modifier,
 ) {
-    Column(
+    Surface(
         modifier = modifier,
     ) {
-        RecipeListHeader(
-            searchText = state.searchText,
-            onSearchTextChanged = {},
+        Column(
             modifier = Modifier
-                .fillMaxWidth(),
-        )
-
-        LazyColumn(
-            contentPadding = PaddingValues(16.dp),
-            verticalArrangement = Arrangement.spacedBy(16.dp),
+                .fillMaxSize(),
         ) {
-            items(state.recipes) { recipe ->
-                RecipeListCard(
-                    recipe = recipe,
-                    modifier = Modifier
-                        .fillMaxWidth(),
-                )
+            RecipeListHeader(
+                searchText = state.searchText,
+                onSearchTextChanged = {},
+                modifier = Modifier
+                    .fillMaxWidth(),
+            )
+
+            LazyColumn(
+                contentPadding = PaddingValues(16.dp),
+                verticalArrangement = Arrangement.spacedBy(16.dp),
+            ) {
+                items(state.recipes) { recipe ->
+                    RecipeListCard(
+                        recipe = recipe,
+                        modifier = Modifier
+                            .fillMaxWidth(),
+                    )
+                }
             }
         }
     }

@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.History
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -30,6 +31,9 @@ fun RecipeListCard(
     modifier: Modifier = Modifier,
 ) {
     Card(
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.primaryContainer,
+        ),
         modifier = modifier,
     ) {
         Row(modifier = Modifier.height(IntrinsicSize.Min)) {
@@ -54,6 +58,9 @@ fun RecipeListCard(
                 InlineIconText(
                     text = recipe.duration,
                     icon = Icons.Default.History,
+                    style = MaterialTheme.typography.labelMedium,
+                    modifier = Modifier
+                        .padding(top = 4.dp),
                 )
             }
         }
