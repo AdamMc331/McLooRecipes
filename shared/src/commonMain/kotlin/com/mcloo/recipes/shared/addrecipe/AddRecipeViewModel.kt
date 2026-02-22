@@ -12,7 +12,37 @@ class AddRecipeViewModel : ViewModel() {
 
     val state = mutableState.asStateFlow()
 
-    fun onNameChange(value: TextFieldValue) {
+    fun onEvent(
+        event: AddRecipeUiEvent,
+    ) {
+        when (event) {
+            AddRecipeUiEvent.CloseClicked -> {
+                onCloseClick()
+            }
+
+            is AddRecipeUiEvent.DurationChanged -> {
+                onDurationChange(event.duration)
+            }
+
+            is AddRecipeUiEvent.IngredientsChanged -> {
+                onIngredientsChange(event.ingredients)
+            }
+
+            is AddRecipeUiEvent.InstructionsChanged -> {
+                onInstructionsChange(event.instructions)
+            }
+
+            is AddRecipeUiEvent.NameChanged -> {
+                onNameChange(event.name)
+            }
+
+            AddRecipeUiEvent.SaveClicked -> {
+                onSaveClick()
+            }
+        }
+    }
+
+    private fun onNameChange(value: TextFieldValue) {
         mutableState.update { currentState ->
             currentState.copy(
                 name = value,
@@ -20,7 +50,7 @@ class AddRecipeViewModel : ViewModel() {
         }
     }
 
-    fun onDurationChange(value: TextFieldValue) {
+    private fun onDurationChange(value: TextFieldValue) {
         mutableState.update { currentState ->
             currentState.copy(
                 duration = value,
@@ -28,7 +58,7 @@ class AddRecipeViewModel : ViewModel() {
         }
     }
 
-    fun onIngredientsChange(value: TextFieldValue) {
+    private fun onIngredientsChange(value: TextFieldValue) {
         mutableState.update { currentState ->
             currentState.copy(
                 ingredients = value,
@@ -36,7 +66,7 @@ class AddRecipeViewModel : ViewModel() {
         }
     }
 
-    fun onInstructionsChange(value: TextFieldValue) {
+    private fun onInstructionsChange(value: TextFieldValue) {
         mutableState.update { currentState ->
             currentState.copy(
                 instructions = value,
@@ -44,11 +74,11 @@ class AddRecipeViewModel : ViewModel() {
         }
     }
 
-    fun onSaveClick() {
+    private fun onSaveClick() {
         // Save recipe
     }
 
-    fun onCloseClick() {
+    private fun onCloseClick() {
         // Navigate back
     }
 

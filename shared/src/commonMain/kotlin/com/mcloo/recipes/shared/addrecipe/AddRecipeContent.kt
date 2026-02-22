@@ -15,15 +15,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
 @Composable
-@Suppress("LongParameterList")
 fun AddRecipeContent(
     state: AddRecipeUiState,
-    onNameChange: (TextFieldValue) -> Unit,
-    onDurationChange: (TextFieldValue) -> Unit,
-    onIngredientsChange: (TextFieldValue) -> Unit,
-    onInstructionsChange: (TextFieldValue) -> Unit,
-    onCloseClick: () -> Unit,
-    onSaveClick: () -> Unit,
+    onEvent: (AddRecipeUiEvent) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Surface(
@@ -33,8 +27,12 @@ fun AddRecipeContent(
         Column {
             AddRecipeHeader(
                 saveButtonEnabled = state.saveButtonEnabled,
-                onCloseClick = onCloseClick,
-                onSaveClick = onSaveClick,
+                onCloseClick = {
+                    onEvent.invoke(AddRecipeUiEvent.CloseClicked)
+                },
+                onSaveClick = {
+                    onEvent.invoke(AddRecipeUiEvent.SaveClicked)
+                },
                 modifier = Modifier
                     .fillMaxWidth(),
             )
@@ -48,22 +46,30 @@ fun AddRecipeContent(
             ) {
                 NameInputSection(
                     value = state.name,
-                    onValueChange = onNameChange,
+                    onValueChange = { name ->
+                        onEvent.invoke(AddRecipeUiEvent.NameChanged(name))
+                    },
                 )
 
                 DurationInputSection(
                     value = state.duration,
-                    onValueChange = onDurationChange,
+                    onValueChange = { duration ->
+                        onEvent.invoke(AddRecipeUiEvent.DurationChanged(duration))
+                    },
                 )
 
                 IngredientsInputSection(
                     value = state.ingredients,
-                    onValueChange = onIngredientsChange,
+                    onValueChange = { ingredients ->
+                        onEvent.invoke(AddRecipeUiEvent.IngredientsChanged(ingredients))
+                    },
                 )
 
                 InstructionsInputSection(
                     value = state.instructions,
-                    onValueChange = onInstructionsChange,
+                    onValueChange = { instructions ->
+                        onEvent.invoke(AddRecipeUiEvent.InstructionsChanged(instructions))
+                    },
                 )
             }
         }
@@ -75,12 +81,7 @@ fun AddRecipeContent(
 fun AddRecipeContentEmptyPreview() {
     AddRecipeContent(
         state = AddRecipeUiState.default(),
-        onNameChange = {},
-        onDurationChange = {},
-        onIngredientsChange = {},
-        onInstructionsChange = {},
-        onCloseClick = {},
-        onSaveClick = {},
+        onEvent = {},
     )
 }
 
@@ -99,11 +100,6 @@ fun AddRecipeContentFilledPreview() {
                     "Flip and cook until done, 165 degrees\n",
             ),
         ),
-        onNameChange = {},
-        onDurationChange = {},
-        onIngredientsChange = {},
-        onInstructionsChange = {},
-        onCloseClick = {},
-        onSaveClick = {},
+        onEvent = {},
     )
 }
