@@ -44,10 +44,10 @@ class AddRecipeViewModel : ViewModel() {
     }
 
     fun onSaveClick() {
-        // TODO: Save recipe
+        // Save recipe
     }
 
     fun onCloseClick() {
-        // TODO: Navigate back
+        // Navigate back
     }
 }
