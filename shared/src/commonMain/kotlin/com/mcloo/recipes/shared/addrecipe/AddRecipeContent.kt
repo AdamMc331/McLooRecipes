@@ -15,6 +15,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
 @Composable
+@Suppress("LongParameterList")
 fun AddRecipeContent(
     state: AddRecipeUiState,
     onNameChange: (TextFieldValue) -> Unit,
