@@ -1,5 +1,6 @@
 package com.mcloo.recipes.shared.addrecipe
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -20,6 +21,8 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun AddRecipeHeader(
+    onCloseClick: () -> Unit,
+    onSaveClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Surface(
@@ -34,6 +37,10 @@ fun AddRecipeHeader(
             Icon(
                 imageVector = Icons.Default.Close,
                 contentDescription = null,
+                modifier = Modifier
+                    .clickable(
+                        onClick = onCloseClick,
+                    ),
             )
 
             Text(
@@ -42,7 +49,7 @@ fun AddRecipeHeader(
             )
 
             Button(
-                onClick = {},
+                onClick = onSaveClick,
                 shape = RoundedCornerShape(8.dp),
             ) {
                 Text(
@@ -57,6 +64,8 @@ fun AddRecipeHeader(
 @Preview
 fun AddRecipeHeaderPreview() {
     AddRecipeHeader(
+        onCloseClick = {},
+        onSaveClick = {},
         modifier = Modifier
             .fillMaxWidth(),
     )
