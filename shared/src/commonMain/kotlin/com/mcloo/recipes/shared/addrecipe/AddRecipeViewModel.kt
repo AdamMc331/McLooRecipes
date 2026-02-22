@@ -2,6 +2,7 @@ package com.mcloo.recipes.shared.addrecipe
 
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.lifecycle.ViewModel
+import com.mcloo.recipes.shared.models.Recipe
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -49,5 +50,18 @@ class AddRecipeViewModel : ViewModel() {
 
     fun onCloseClick() {
         // Navigate back
+    }
+
+    private fun buildRecipe(): Recipe {
+        return Recipe(
+            id = state.value.name.text, // Replace this?
+            name = state.value.name.text,
+            duration = state.value.duration.text,
+            ingredients = state.value.ingredients.text
+                .split("\n"),
+            instructions = state.value.instructions.text
+                .split("\n"),
+            tags = emptyList(),
+        )
     }
 }

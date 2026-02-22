@@ -32,6 +32,7 @@ fun AddRecipeContent(
     ) {
         Column {
             AddRecipeHeader(
+                saveButtonEnabled = state.saveButtonEnabled,
                 onCloseClick = onCloseClick,
                 onSaveClick = onSaveClick,
                 modifier = Modifier
@@ -71,9 +72,33 @@ fun AddRecipeContent(
 
 @Composable
 @Preview
-fun AddRecipeContentPreviewEmpty() {
+fun AddRecipeContentEmptyPreview() {
     AddRecipeContent(
         state = AddRecipeUiState.default(),
+        onNameChange = {},
+        onDurationChange = {},
+        onIngredientsChange = {},
+        onInstructionsChange = {},
+        onCloseClick = {},
+        onSaveClick = {},
+    )
+}
+
+@Composable
+@Preview
+fun AddRecipeContentFilledPreview() {
+    AddRecipeContent(
+        state = AddRecipeUiState(
+            name = TextFieldValue("Crispy Chicken Thighs"),
+            duration = TextFieldValue("30 min"),
+            ingredients = TextFieldValue("Salt\nPepper\nPaprika\nGarlic Powder\nBone-in, skin on chicken thighs"),
+            instructions = TextFieldValue(
+                "Season skin side with salt\n" +
+                    "Season meat side with salt, pepper, garlic powder, and paprika\n" +
+                    "Place on cold saucepan skin side down for 15 minutes, until crispy\n" +
+                    "Flip and cook until done, 165 degrees\n",
+            ),
+        ),
         onNameChange = {},
         onDurationChange = {},
         onIngredientsChange = {},
