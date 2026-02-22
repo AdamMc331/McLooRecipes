@@ -2,12 +2,17 @@ package com.mcloo.recipes.shared.addrecipe
 
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.mcloo.recipes.shared.data.repositories.RecipeRepository
 import com.mcloo.recipes.shared.models.Recipe
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 
-class AddRecipeViewModel : ViewModel() {
+class AddRecipeViewModel(
+    private val recipeRepository: RecipeRepository,
+) : ViewModel() {
     private val mutableState = MutableStateFlow(AddRecipeUiState.default())
 
     val state = mutableState.asStateFlow()
@@ -75,7 +80,12 @@ class AddRecipeViewModel : ViewModel() {
     }
 
     private fun onSaveClick() {
-        // Save recipe
+        val recipe = buildRecipe()
+
+        viewModelScope.launch {
+            // Need loading state
+            recipeRepository.saveRecipe(recipe)
+        }
     }
 
     private fun onCloseClick() {
