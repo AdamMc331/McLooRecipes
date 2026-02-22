@@ -22,6 +22,8 @@ fun AddRecipeContent(
     onDurationChange: (TextFieldValue) -> Unit,
     onIngredientsChange: (TextFieldValue) -> Unit,
     onInstructionsChange: (TextFieldValue) -> Unit,
+    onCloseClick: () -> Unit,
+    onSaveClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Surface(
@@ -30,6 +32,8 @@ fun AddRecipeContent(
     ) {
         Column {
             AddRecipeHeader(
+                onCloseClick = onCloseClick,
+                onSaveClick = onSaveClick,
                 modifier = Modifier
                     .fillMaxWidth(),
             )
@@ -74,5 +78,7 @@ fun AddRecipeContentPreviewEmpty() {
         onDurationChange = {},
         onIngredientsChange = {},
         onInstructionsChange = {},
+        onCloseClick = {},
+        onSaveClick = {},
     )
 }
