@@ -21,6 +21,7 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun AddRecipeHeader(
+    saveButtonEnabled: Boolean,
     onCloseClick: () -> Unit,
     onSaveClick: () -> Unit,
     modifier: Modifier = Modifier,
@@ -51,6 +52,7 @@ fun AddRecipeHeader(
             Button(
                 onClick = onSaveClick,
                 shape = RoundedCornerShape(8.dp),
+                enabled = saveButtonEnabled,
             ) {
                 Text(
                     text = "Save",
@@ -62,8 +64,21 @@ fun AddRecipeHeader(
 
 @Composable
 @Preview
-fun AddRecipeHeaderPreview() {
+fun AddRecipeHeaderEnabledPreview() {
     AddRecipeHeader(
+        saveButtonEnabled = true,
+        onCloseClick = {},
+        onSaveClick = {},
+        modifier = Modifier
+            .fillMaxWidth(),
+    )
+}
+
+@Composable
+@Preview
+fun AddRecipeHeaderDisabledPreview() {
+    AddRecipeHeader(
+        saveButtonEnabled = false,
         onCloseClick = {},
         onSaveClick = {},
         modifier = Modifier

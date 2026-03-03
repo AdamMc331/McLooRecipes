@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.map
 
 class DebugRecipeRepository : RecipeRepository {
-    private val debugRecipes = listOf(
+    private val debugRecipes = mutableListOf(
         Recipe(
             id = "chicken_thighs",
             name = "Crispy Chicken Thighs",
@@ -63,5 +63,9 @@ class DebugRecipeRepository : RecipeRepository {
                 }
             }
         }
+    }
+
+    override suspend fun saveRecipe(recipe: Recipe) {
+        debugRecipes.add(recipe)
     }
 }

@@ -7,4 +7,8 @@ interface RecipeRepository {
     fun getRecipes(
         query: String,
     ): Flow<List<Recipe>>
+
+    suspend fun saveRecipe(
+        recipe: Recipe,
+    )
 }

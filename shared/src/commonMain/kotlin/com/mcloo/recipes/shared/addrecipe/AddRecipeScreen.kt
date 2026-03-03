@@ -13,12 +13,7 @@ fun AddRecipeScreen(
 
     AddRecipeContent(
         state = state.value,
-        onNameChange = viewModel::onNameChange,
-        onDurationChange = viewModel::onDurationChange,
-        onIngredientsChange = viewModel::onIngredientsChange,
-        onInstructionsChange = viewModel::onInstructionsChange,
-        onCloseClick = viewModel::onCloseClick,
-        onSaveClick = viewModel::onSaveClick,
+        onEvent = viewModel::onEvent,
         modifier = modifier,
     )
 }

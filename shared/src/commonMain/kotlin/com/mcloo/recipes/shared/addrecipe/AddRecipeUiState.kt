@@ -8,6 +8,8 @@ data class AddRecipeUiState(
     val ingredients: TextFieldValue,
     val instructions: TextFieldValue,
 ) {
+    val saveButtonEnabled: Boolean = name.text.isNotBlank()
+
     companion object {
         fun default(): AddRecipeUiState {
             return AddRecipeUiState(
