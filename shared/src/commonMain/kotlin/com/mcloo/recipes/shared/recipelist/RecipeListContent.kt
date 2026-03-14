@@ -22,6 +22,7 @@ import com.mcloo.recipes.shared.ui.theme.McLooTheme
 @Composable
 fun RecipeListContent(
     state: RecipeListUiState,
+    onAddRecipeClicked: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Surface(
@@ -34,6 +35,7 @@ fun RecipeListContent(
             RecipeListHeader(
                 searchText = state.searchText,
                 onSearchTextChanged = {},
+                onAddRecipeClicked = onAddRecipeClicked,
                 modifier = Modifier
                     .fillMaxWidth(),
             )
@@ -89,6 +91,7 @@ fun RecipeListContentPreview() {
     McLooTheme {
         RecipeListContent(
             state = state,
+            onAddRecipeClicked = {},
             modifier = Modifier
                 .fillMaxWidth(),
         )
