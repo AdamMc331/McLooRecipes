@@ -12,6 +12,7 @@ import androidx.savedstate.serialization.SavedStateConfiguration
 import com.mcloo.recipes.shared.addrecipe.AddRecipeScreen
 import com.mcloo.recipes.shared.addrecipe.AddRecipeViewModel
 import com.mcloo.recipes.shared.data.DebugRecipeRepository
+import com.mcloo.recipes.shared.recipedetail.RecipeDetailScreen
 import com.mcloo.recipes.shared.recipelist.RecipeListScreen
 import com.mcloo.recipes.shared.recipelist.RecipeListViewModel
 import kotlinx.serialization.modules.SerializersModule
@@ -22,6 +23,7 @@ private val config = SavedStateConfiguration {
         polymorphic(NavKey::class) {
             subclass(Route.RecipeList::class, Route.RecipeList.serializer())
             subclass(Route.AddRecipe::class, Route.AddRecipe.serializer())
+            subclass(Route.RecipeDetail::class, Route.RecipeDetail.serializer())
         }
     }
 }
@@ -50,6 +52,9 @@ fun AppNavHost(
                             onAddRecipeClicked = {
                                 backStack.add(Route.AddRecipe)
                             },
+                            onRecipeClicked = { id ->
+                                backStack.add(Route.RecipeDetail(id = id))
+                            },
                         )
                     }
                 }
@@ -64,9 +69,17 @@ fun AppNavHost(
                             },
                             onCloseClicked = {
                                 if (backStack.isNotEmpty()) {
-                                    backStack.dropLast(1)
+                                    backStack.removeAt(backStack.size - 1)
                                 }
                             },
+                        )
+                    }
+                }
+
+                is Route.RecipeDetail -> {
+                    NavEntry(key) {
+                        RecipeDetailScreen(
+                            id = key.id,
                         )
                     }
                 }

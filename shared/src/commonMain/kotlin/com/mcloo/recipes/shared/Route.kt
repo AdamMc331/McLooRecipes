@@ -10,4 +10,9 @@ sealed interface Route : NavKey {
 
     @Serializable
     data object AddRecipe : Route
+
+    @Serializable
+    data class RecipeDetail(
+        val id: String,
+    ) : Route
 }

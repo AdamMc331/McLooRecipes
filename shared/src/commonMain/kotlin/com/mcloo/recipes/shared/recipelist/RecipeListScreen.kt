@@ -9,6 +9,7 @@ import androidx.compose.ui.Modifier
 fun RecipeListScreen(
     viewModel: RecipeListViewModel,
     onAddRecipeClicked: () -> Unit,
+    onRecipeClicked: (String) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val state = viewModel.state.collectAsState()
@@ -16,6 +17,7 @@ fun RecipeListScreen(
     RecipeListContent(
         state = state.value,
         onAddRecipeClicked = onAddRecipeClicked,
+        onRecipeClicked = onRecipeClicked,
         modifier = modifier
             .statusBarsPadding(),
     )

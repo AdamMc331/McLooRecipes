@@ -23,6 +23,7 @@ import com.mcloo.recipes.shared.ui.theme.McLooTheme
 fun RecipeListContent(
     state: RecipeListUiState,
     onAddRecipeClicked: () -> Unit,
+    onRecipeClicked: (String) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Surface(
@@ -47,6 +48,7 @@ fun RecipeListContent(
                 items(state.recipes) { recipe ->
                     RecipeListCard(
                         recipe = recipe,
+                        onClick = { onRecipeClicked(recipe.id) },
                         modifier = Modifier
                             .fillMaxWidth(),
                     )
@@ -92,6 +94,7 @@ fun RecipeListContentPreview() {
         RecipeListContent(
             state = state,
             onAddRecipeClicked = {},
+            onRecipeClicked = {},
             modifier = Modifier
                 .fillMaxWidth(),
         )
