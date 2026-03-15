@@ -58,7 +58,6 @@ kotlin {
             implementation(libs.jetbrains.compose.navigation3)
             implementation(libs.jetbrains.compose.runtime)
             implementation(libs.jetbrains.compose.ui)
-            implementation(libs.jetbrains.compose.ui.test)
             implementation(libs.jetbrains.compose.ui.tooling.preview)
             implementation(libs.koin.core)
             implementation(libs.kotlinx.datetime)
@@ -80,6 +79,7 @@ kotlin {
         commonTest.dependencies {
             implementation(kotlin("test"))
             implementation(libs.google.testparameterinjector)
+            implementation(libs.jetbrains.compose.ui.test)
             implementation(libs.koin.test)
         }
 
