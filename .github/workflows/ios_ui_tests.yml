@@ -10,7 +10,7 @@ on:
   pull_request:
 
 jobs:
-  android-test:
+  ios-test:
     runs-on: macos-15
     steps:
       - name: Checkout
