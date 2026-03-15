@@ -93,6 +93,7 @@ fun AddRecipeContentFilledPreview() {
             name = TextFieldValue("Crispy Chicken Thighs"),
             duration = TextFieldValue("30 min"),
             ingredients = TextFieldValue("Salt\nPepper\nPaprika\nGarlic Powder\nBone-in, skin on chicken thighs"),
+            isComplete = false,
             instructions = TextFieldValue(
                 "Season skin side with salt\n" +
                     "Season meat side with salt, pepper, garlic powder, and paprika\n" +

@@ -46,6 +46,7 @@ kotlin {
         commonMain.dependencies {
             implementation(libs.androidx.lifecycle.viewmodel)
             implementation(libs.androidx.lifecycle.runtime.compose)
+            implementation(libs.androidx.lifecycle.viewmodel.compose)
             implementation(libs.coil.compose)
             implementation(libs.coil.ktor)
             implementation(libs.compose.material3.adaptive)
@@ -53,6 +54,7 @@ kotlin {
             implementation(libs.jetbrains.compose.foundation)
             implementation(libs.jetbrains.compose.material.icons.extended)
             implementation(libs.jetbrains.compose.material3)
+            implementation(libs.jetbrains.compose.navigation3)
             implementation(libs.jetbrains.compose.runtime)
             implementation(libs.jetbrains.compose.ui)
             implementation(libs.jetbrains.compose.ui.tooling.preview)

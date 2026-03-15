@@ -1,5 +1,6 @@
 package com.mcloo.recipes.shared.recipelist
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
@@ -28,13 +29,15 @@ import com.mcloo.recipes.shared.ui.theme.McLooTheme
 @Composable
 fun RecipeListCard(
     recipe: RecipeDisplayModel,
+    onClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Card(
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.primaryContainer,
         ),
-        modifier = modifier,
+        modifier = modifier
+            .clickable(onClick = onClick),
     ) {
         Row(modifier = Modifier.height(IntrinsicSize.Min)) {
             ImageWrapper(
@@ -94,6 +97,7 @@ fun RecipeListCardPreview() {
     McLooTheme {
         RecipeListCard(
             recipe = recipe,
+            onClick = {},
             modifier = Modifier
                 .fillMaxWidth(),
         )

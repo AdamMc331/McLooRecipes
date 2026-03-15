@@ -29,6 +29,7 @@ import com.mcloo.recipes.shared.ui.theme.McLooTheme
 fun RecipeListHeader(
     searchText: TextFieldValue,
     onSearchTextChanged: (TextFieldValue) -> Unit,
+    onAddRecipeClicked: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Surface(
@@ -39,7 +40,9 @@ fun RecipeListHeader(
             modifier = Modifier
                 .padding(16.dp),
         ) {
-            TitleAndAddButton()
+            TitleAndAddButton(
+                onAddRecipeClicked = onAddRecipeClicked,
+            )
 
             SearchBar(
                 searchText = searchText,
@@ -77,7 +80,9 @@ private fun SearchBar(
 }
 
 @Composable
-private fun TitleAndAddButton() {
+private fun TitleAndAddButton(
+    onAddRecipeClicked: () -> Unit,
+) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
     ) {
@@ -87,8 +92,7 @@ private fun TitleAndAddButton() {
         )
 
         AddButton(
-            onClick = {
-            },
+            onClick = onAddRecipeClicked,
         )
     }
 }
@@ -129,6 +133,7 @@ fun RecipeListHeaderPreview() {
         RecipeListHeader(
             searchText = TextFieldValue(),
             onSearchTextChanged = {},
+            onAddRecipeClicked = {},
             modifier = Modifier
                 .fillMaxWidth(),
         )
