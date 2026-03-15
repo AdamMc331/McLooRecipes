@@ -1,6 +1,7 @@
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.plugin.KotlinPlatformType
+import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSetTree
 import org.jmailen.gradle.kotlinter.tasks.FormatTask
 import org.jmailen.gradle.kotlinter.tasks.LintTask
 
@@ -17,7 +18,7 @@ dependencies {
 }
 
 kotlin {
-    androidLibrary {
+    android {
         compileSdk = libs.versions.compileSdk.get().toInt()
         minSdk = libs.versions.minSdk.get().toInt()
 
@@ -27,6 +28,11 @@ kotlin {
         compilerOptions {
             jvmTarget.set(JvmTarget.JVM_17)
         }
+    }
+
+    androidTarget {
+        @OptIn(ExperimentalKotlinGradlePluginApi::class)
+        instrumentedTestVariant.sourceSetTree.set(KotlinSourceSetTree.test)
     }
 
     listOf(
@@ -57,6 +63,7 @@ kotlin {
             implementation(libs.jetbrains.compose.navigation3)
             implementation(libs.jetbrains.compose.runtime)
             implementation(libs.jetbrains.compose.ui)
+            implementation(libs.jetbrains.compose.ui.test)
             implementation(libs.jetbrains.compose.ui.tooling.preview)
             implementation(libs.koin.core)
             implementation(libs.kotlinx.datetime)
@@ -64,6 +71,7 @@ kotlin {
             implementation(libs.ktor.client.core)
             implementation(libs.ktor.client.logging)
             implementation(libs.ktor.serialization.kotlinx.json)
+
         }
 
         androidMain.dependencies {
