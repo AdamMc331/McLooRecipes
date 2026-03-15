@@ -30,11 +30,6 @@ kotlin {
         }
     }
 
-    androidTarget {
-        @OptIn(ExperimentalKotlinGradlePluginApi::class)
-        instrumentedTestVariant.sourceSetTree.set(KotlinSourceSetTree.test)
-    }
-
     listOf(
         iosX64(),
         iosArm64(),

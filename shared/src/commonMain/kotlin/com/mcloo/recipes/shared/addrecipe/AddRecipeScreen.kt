@@ -5,6 +5,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
+
+const val ADD_RECIPE_SCREEN_TAG = "AddRecipeScreen"
 
 @Composable
 fun AddRecipeScreen(
@@ -26,6 +29,7 @@ fun AddRecipeScreen(
         state = state.value,
         onEvent = viewModel::onEvent,
         modifier = modifier
+            .testTag(ADD_RECIPE_SCREEN_TAG)
             .statusBarsPadding(),
     )
 }
