@@ -89,7 +89,11 @@ class AddRecipeViewModel(
     }
 
     private fun onCloseClick() {
-        // Navigate back
+        mutableState.update { currentState ->
+            currentState.copy(
+                isComplete = true,
+            )
+        }
     }
 
     private fun buildRecipe(): Recipe {

@@ -49,10 +49,10 @@ fun AppNavHost(
                                     repository = DebugRecipeRepository(),
                                 )
                             },
-                            onAddRecipeClicked = {
+                            navigateToAddRecipe = {
                                 backStack.add(Route.AddRecipe)
                             },
-                            onRecipeClicked = { id ->
+                            navigateToRecipeDetail = { id ->
                                 backStack.add(Route.RecipeDetail(id = id))
                             },
                         )
@@ -67,7 +67,7 @@ fun AppNavHost(
                                     recipeRepository = DebugRecipeRepository(),
                                 )
                             },
-                            onCloseClicked = {
+                            onComplete = {
                                 if (backStack.isNotEmpty()) {
                                     backStack.removeAt(backStack.size - 1)
                                 }

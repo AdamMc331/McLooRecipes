@@ -8,16 +8,26 @@ import androidx.compose.ui.Modifier
 @Composable
 fun RecipeListScreen(
     viewModel: RecipeListViewModel,
-    onAddRecipeClicked: () -> Unit,
-    onRecipeClicked: (String) -> Unit,
+    navigateToAddRecipe: () -> Unit,
+    navigateToRecipeDetail: (String) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val state = viewModel.state.collectAsState()
 
     RecipeListContent(
         state = state.value,
-        onAddRecipeClicked = onAddRecipeClicked,
-        onRecipeClicked = onRecipeClicked,
+        onEvent = { event ->
+            // Ideally these get passed into ViewModel and handled as state, will do in a follow up.
+            when (event) {
+                RecipeListUiEvent.AddRecipeClicked -> {
+                    navigateToAddRecipe.invoke()
+                }
+
+                is RecipeListUiEvent.RecipeClicked -> {
+                    navigateToRecipeDetail.invoke(event.recipeId)
+                }
+            }
+        },
         modifier = modifier
             .statusBarsPadding(),
     )

@@ -7,6 +7,7 @@ data class AddRecipeUiState(
     val duration: TextFieldValue,
     val ingredients: TextFieldValue,
     val instructions: TextFieldValue,
+    val isComplete: Boolean,
 ) {
     val saveButtonEnabled: Boolean = name.text.isNotBlank()
 
@@ -17,6 +18,7 @@ data class AddRecipeUiState(
                 duration = TextFieldValue(),
                 ingredients = TextFieldValue(),
                 instructions = TextFieldValue(),
+                isComplete = false,
             )
         }
     }
