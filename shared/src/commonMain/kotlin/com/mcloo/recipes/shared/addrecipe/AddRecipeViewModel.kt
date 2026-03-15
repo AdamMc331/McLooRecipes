@@ -1,5 +1,6 @@
 package com.mcloo.recipes.shared.addrecipe
 
+import androidx.compose.ui.graphics.vector.Path
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -44,6 +45,10 @@ class AddRecipeViewModel(
             AddRecipeUiEvent.SaveClicked -> {
                 onSaveClick()
             }
+
+            AddRecipeUiEvent.CompletionHandled -> {
+                handleCompletion()
+            }
         }
     }
 
@@ -85,6 +90,12 @@ class AddRecipeViewModel(
         viewModelScope.launch {
             // Need loading state
             recipeRepository.saveRecipe(recipe)
+
+            mutableState.update { currentState ->
+                currentState.copy(
+                    isComplete = true,
+                )
+            }
         }
     }
 
@@ -92,6 +103,14 @@ class AddRecipeViewModel(
         mutableState.update { currentState ->
             currentState.copy(
                 isComplete = true,
+            )
+        }
+    }
+
+    private fun handleCompletion() {
+        mutableState.update { currentState ->
+            currentState.copy(
+                isComplete = false,
             )
         }
     }

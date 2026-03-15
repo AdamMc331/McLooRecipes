@@ -17,6 +17,8 @@ fun AddRecipeScreen(
     LaunchedEffect(state.value.isComplete) {
         if (state.value.isComplete) {
             onComplete.invoke()
+
+            viewModel.onEvent(AddRecipeUiEvent.CompletionHandled)
         }
     }
 

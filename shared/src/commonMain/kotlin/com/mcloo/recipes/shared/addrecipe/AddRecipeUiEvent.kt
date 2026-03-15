@@ -22,4 +22,6 @@ sealed interface AddRecipeUiEvent {
     data class InstructionsChanged(
         val instructions: TextFieldValue,
     ) : AddRecipeUiEvent
+
+    data object CompletionHandled : AddRecipeUiEvent
 }
