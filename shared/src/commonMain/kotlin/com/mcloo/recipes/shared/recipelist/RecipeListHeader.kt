@@ -20,10 +20,13 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.mcloo.recipes.shared.ui.theme.McLooTheme
+
+const val ADD_RECIPE_BUTTON = "AddRecipeButton"
 
 @Composable
 fun RecipeListHeader(
@@ -106,6 +109,7 @@ private fun AddButton(
         onClick = onClick,
         shape = CircleShape,
         modifier = modifier
+            .testTag(ADD_RECIPE_BUTTON)
             .size(48.dp),
     ) {
         Icon(

@@ -50,6 +50,7 @@ jetbrains-compose-material-icons-extended = { module = "org.jetbrains.compose.ma
 jetbrains-compose-navigation3 = { module = "org.jetbrains.androidx.navigation3:navigation3-ui", version.ref = "nav3" }
 jetbrains-compose-runtime = { module = "org.jetbrains.compose.runtime:runtime", version.ref = "kmpCompose" }
 jetbrains-compose-ui = { module = "org.jetbrains.compose.ui:ui", version.ref = "kmpCompose" }
+jetbrains-compose-ui-test = { module = "org.jetbrains.compose.ui:ui-test", version.ref = "kmpCompose" }
 jetbrains-compose-ui-tooling = { module = "org.jetbrains.compose.ui:ui-tooling", version.ref = "kmpCompose" }
 jetbrains-compose-ui-tooling-preview = { module = "org.jetbrains.compose.ui:ui-tooling-preview", version.ref = "kmpCompose" }
 junit = { module = "junit:junit", version.ref = "junit" }

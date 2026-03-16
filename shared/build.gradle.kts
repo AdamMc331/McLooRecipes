@@ -1,4 +1,3 @@
-import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.plugin.KotlinPlatformType
 import org.jmailen.gradle.kotlinter.tasks.FormatTask
@@ -17,15 +16,23 @@ dependencies {
 }
 
 kotlin {
-    androidLibrary {
+    android {
+        namespace = "com.mcloo.recipes.shared"
         compileSdk = libs.versions.compileSdk.get().toInt()
         minSdk = libs.versions.minSdk.get().toInt()
 
-        namespace = "com.mcloo.recipes.shared"
+        withDeviceTestBuilder {
+            sourceSetTreeName = "test"
+        }.configure {
+            instrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        }
 
-        @OptIn(ExperimentalKotlinGradlePluginApi::class)
         compilerOptions {
             jvmTarget.set(JvmTarget.JVM_17)
+        }
+
+        androidResources {
+            enable = true
         }
     }
 
@@ -78,7 +85,15 @@ kotlin {
         commonTest.dependencies {
             implementation(kotlin("test"))
             implementation(libs.google.testparameterinjector)
+            implementation(libs.jetbrains.compose.ui.test)
             implementation(libs.koin.test)
+        }
+
+        getByName("androidDeviceTest") {
+            dependencies {
+                implementation(libs.compose.ui.test.manifest)
+                implementation(libs.androidx.activity.compose)
+            }
         }
 
         targets.configureEach {

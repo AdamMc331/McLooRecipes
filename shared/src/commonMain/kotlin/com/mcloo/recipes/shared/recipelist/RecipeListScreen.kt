@@ -4,6 +4,9 @@ import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
+
+const val RECIPE_LIST_SCREEN_TAG = "RecipeListScreen"
 
 @Composable
 fun RecipeListScreen(
@@ -29,6 +32,7 @@ fun RecipeListScreen(
             }
         },
         modifier = modifier
+            .testTag(RECIPE_LIST_SCREEN_TAG)
             .statusBarsPadding(),
     )
 }

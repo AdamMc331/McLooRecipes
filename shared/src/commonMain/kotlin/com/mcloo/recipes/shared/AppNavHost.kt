@@ -34,8 +34,6 @@ fun AppNavHost(
 ) {
     val backStack = rememberNavBackStack(config, Route.RecipeList)
 
-    println("ADAMLOg - BACKSTACK: $backStack")
-
     NavDisplay(
         backStack = backStack,
         modifier = modifier,
