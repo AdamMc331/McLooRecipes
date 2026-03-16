@@ -23,6 +23,8 @@ kotlin {
 
         withDeviceTestBuilder {
             sourceSetTreeName = "test"
+        }.configure {
+            instrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         }
 
         compilerOptions {
@@ -87,7 +89,7 @@ kotlin {
             implementation(libs.koin.test)
         }
 
-        val androidDeviceTest by getting {
+        getByName("androidDeviceTest") {
             dependencies {
                 implementation(libs.compose.ui.test.manifest)
                 implementation(libs.androidx.activity.compose)
