@@ -55,7 +55,8 @@ fun RecipeListContent(
                             onEvent.invoke(RecipeListUiEvent.RecipeClicked(recipe.id))
                         },
                         modifier = Modifier
-                            .fillMaxWidth(),
+                            .fillMaxWidth()
+                            .animateItem(),
                     )
                 }
             }
