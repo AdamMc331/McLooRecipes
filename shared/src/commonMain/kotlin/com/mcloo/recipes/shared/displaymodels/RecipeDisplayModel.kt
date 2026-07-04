@@ -19,6 +19,10 @@ data class RecipeDisplayModel(
         tags = recipe.tags,
         ingredients = recipe.ingredients,
         instructions = recipe.instructions,
-        image = UiImage.Placeholder,
+        image = if (recipe.imageUrl != null) {
+            UiImage.Remote(recipe.imageUrl)
+        } else {
+            UiImage.Placeholder
+        },
     )
 }
