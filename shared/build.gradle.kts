@@ -57,6 +57,8 @@ kotlin {
             implementation(libs.coil.compose)
             implementation(libs.coil.ktor)
             implementation(libs.compose.material3.adaptive)
+            implementation(libs.gitlive.firebase.common)
+            implementation(libs.gitlive.firebase.firestore)
             implementation(libs.jetbrains.compose.components.resources)
             implementation(libs.jetbrains.compose.foundation)
             implementation(libs.jetbrains.compose.material.icons.extended)
@@ -75,6 +77,7 @@ kotlin {
 
         androidMain.dependencies {
 
+            implementation(project.dependencies.platform(libs.android.firebase.bom))
             implementation(libs.ktor.client.android)
         }
 

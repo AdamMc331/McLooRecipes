@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.google.devtools.ksp)
+    alias(libs.plugins.google.services)
 }
 
 android {
@@ -54,6 +55,7 @@ android {
 }
 
 dependencies {
+    implementation(project.dependencies.platform(libs.android.firebase.bom))
     implementation(platform(libs.compose.bom))
     implementation(project(":shared"))
     implementation(libs.android.material)

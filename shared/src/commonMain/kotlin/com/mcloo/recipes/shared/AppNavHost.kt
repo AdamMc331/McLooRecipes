@@ -12,6 +12,7 @@ import androidx.savedstate.serialization.SavedStateConfiguration
 import com.mcloo.recipes.shared.addrecipe.AddRecipeScreen
 import com.mcloo.recipes.shared.addrecipe.AddRecipeViewModel
 import com.mcloo.recipes.shared.data.DebugRecipeRepository
+import com.mcloo.recipes.shared.data.remote.FirebaseRecipeRepository
 import com.mcloo.recipes.shared.recipedetail.RecipeDetailScreen
 import com.mcloo.recipes.shared.recipelist.RecipeListScreen
 import com.mcloo.recipes.shared.recipelist.RecipeListViewModel
@@ -44,7 +45,7 @@ fun AppNavHost(
                         RecipeListScreen(
                             viewModel = viewModel {
                                 RecipeListViewModel(
-                                    repository = DebugRecipeRepository(),
+                                    repository = FirebaseRecipeRepository(),
                                 )
                             },
                             navigateToAddRecipe = {
