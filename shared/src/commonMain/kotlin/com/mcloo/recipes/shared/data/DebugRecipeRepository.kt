@@ -58,8 +58,8 @@ class DebugRecipeRepository : RecipeRepository {
     override fun getRecipes(query: String): Flow<List<Recipe>> {
         return flowOf(debugRecipes).map { recipes ->
             recipes.filter { recipe ->
-                recipe.name.contains(query) || recipe.ingredients.any { ingredient ->
-                    ingredient.contains(query)
+                recipe.name.contains(query, ignoreCase = true) || recipe.ingredients.any { ingredient ->
+                    ingredient.contains(query, ignoreCase = true)
                 }
             }
         }
