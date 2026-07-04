@@ -29,6 +29,10 @@ fun RecipeListScreen(
                 is RecipeListUiEvent.RecipeClicked -> {
                     navigateToRecipeDetail.invoke(event.recipeId)
                 }
+
+                is RecipeListUiEvent.SearchTextChanged -> {
+                    viewModel.onSearchTextChanged(event.searchText)
+                }
             }
         },
         modifier = modifier

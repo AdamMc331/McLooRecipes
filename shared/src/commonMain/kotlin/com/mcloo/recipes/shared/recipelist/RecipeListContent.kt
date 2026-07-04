@@ -34,7 +34,9 @@ fun RecipeListContent(
         ) {
             RecipeListHeader(
                 searchText = state.searchText,
-                onSearchTextChanged = {},
+                onSearchTextChanged = {
+                    onEvent.invoke(RecipeListUiEvent.SearchTextChanged(it))
+                },
                 onAddRecipeClicked = {
                     onEvent.invoke(RecipeListUiEvent.AddRecipeClicked)
                 },
