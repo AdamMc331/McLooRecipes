@@ -20,6 +20,12 @@ jobs:
           distribution: 'zulu'
           java-version-file: .github/.java-version
 
+      - name: Recreate google-services.json
+        env:
+          GOOGLE_SERVICES_SECRET: ${{ secrets.GOOGLE_SERVICES_JSON }}
+        run: |
+          echo "$GOOGLE_SERVICES_SECRET" | > ./androidApp/google-services.json
+
       - name: Run tests
         run: ./gradlew :shared:iosX64Test
 
