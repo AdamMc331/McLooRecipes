@@ -7,4 +7,5 @@ data class Recipe(
     val tags: List<String>,
     val ingredients: List<String>,
     val instructions: List<String>,
+    val imageUrl: String?,
 )

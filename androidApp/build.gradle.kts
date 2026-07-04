@@ -55,7 +55,6 @@ android {
 }
 
 dependencies {
-    implementation(project.dependencies.platform(libs.android.firebase.bom))
     implementation(platform(libs.compose.bom))
     implementation(project(":shared"))
     implementation(libs.android.material)
