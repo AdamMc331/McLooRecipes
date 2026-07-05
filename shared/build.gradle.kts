@@ -43,7 +43,6 @@ kotlin {
         iosTarget.binaries.framework {
             baseName = "shared"
             isStatic = true
-            freeCompilerArgs += "-Xdisable-linker-caches"
         }
     }
 
