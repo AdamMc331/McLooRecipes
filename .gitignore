@@ -11,3 +11,4 @@ local.properties
 .kotlin/
 .fleet/
 google-services.json
+GoogleService-Info.plist
