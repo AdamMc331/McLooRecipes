@@ -14,6 +14,7 @@ jobs:
 
   android-build:
     runs-on: macos-14
+    needs: setup
     steps:
       # assembleDebug is used to improve build times by only building
       # the debug Android artifacts. https://touchlab.co/touchlab-build-only-what-you-need
