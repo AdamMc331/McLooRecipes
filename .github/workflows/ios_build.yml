@@ -16,6 +16,9 @@ jobs:
 
       - name: Setup
         uses: ./.github/actions/workflow_setup
+        with:
+          google_services_json: ${{ secrets.GOOGLE_SERVICES_JSON }}
+          google_services_plist: ${{ secrets.GOOGLE_SERVICES_PLIST }}
 
       - name: Run tests
         run: ./gradlew :shared:iosSimulatorArm64Test

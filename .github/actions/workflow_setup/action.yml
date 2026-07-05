@@ -2,6 +2,14 @@ name: "Workflow Setup"
 
 description: "Common setup across multiple workflows."
 
+inputs:
+  google_services_json:
+    description: 'File content for google-services.json'
+    required: true
+  google_services_plist:
+    description: 'File content for GoogleService-Info.plist'
+    required: true
+
 runs:
   using: "composite"
 
@@ -19,13 +27,15 @@ runs:
         cache-read-only: ${{ github.ref != 'refs/heads/development' }}
 
     - name: Recreate google-services.json
+      uses: none
       env:
-        GOOGLE_SERVICES_SECRET: ${{ secrets.GOOGLE_SERVICES_JSON }}
+        GOOGLE_SERVICES_SECRET: ${{ inputs.google_services_json }}
       run: |
         echo "$GOOGLE_SERVICES_SECRET" > ./androidApp/google-services.json
 
     - name: Recreate GoogleService-Info.plist
+      uses: none
       env:
-        GOOGLE_SERVICES_SECRET: ${{ secrets.GOOGLE_SERVICES_PLISt }}
+        GOOGLE_SERVICES_SECRET: ${{ inputs.google_services_plist }}
       run: |
         echo "$GOOGLE_SERVICES_SECRET" > ./iosApp/mclooRecipesIOS/GoogleService-Info.plist
