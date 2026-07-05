@@ -1,0 +1,33 @@
+name: "Workflow Setup"
+
+description: "Common setup across multiple workflows."
+
+runs:
+  using: "composite"
+
+  steps:
+    - name: Set Up JDK
+      uses: actions/setup-java@v5
+      with:
+        distribution: 'zulu'
+        java-version-file: .github/.java-version
+
+    - name: Setup Gradle
+      uses: gradle/gradle-build-action@v3
+      with:
+        # Only write to the cache for builds on the 'development' branch
+        cache-read-only: ${{ github.ref != 'refs/heads/development' }}
+
+    - name: Recreate google-services.json
+      uses: none
+      env:
+        GOOGLE_SERVICES_SECRET: ${{ secrets.GOOGLE_SERVICES_JSON }}
+      run: |
+        echo "$GOOGLE_SERVICES_SECRET" > ./androidApp/google-services.json
+
+    - name: Recreate GoogleService-Info.plist
+      uses: none
+      env:
+        GOOGLE_SERVICES_SECRET: ${{ secrets.GOOGLE_SERVICES_PLISt }}
+      run: |
+        echo "$GOOGLE_SERVICES_SECRET" > ./iosApp/mclooRecipesIOS/GoogleService-Info.plist

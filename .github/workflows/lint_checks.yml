@@ -14,17 +14,8 @@ jobs:
     steps:
       - uses: actions/checkout@v6
 
-      - name: Set Up JDK
-        uses: actions/setup-java@v5
-        with:
-          distribution: 'zulu'
-          java-version-file: .github/.java-version
-
-      - name: Setup Gradle
-        uses: gradle/gradle-build-action@v3
-        with:
-          # Only write to the cache for builds on the 'development' branch
-          cache-read-only: ${{ github.ref != 'refs/heads/development' }}
+      - name: Setup
+        uses: ./.github/actions/workflow_setup
 
       - name: Lint Checks
         run: ./gradlew detektAll lintKotlin lint
