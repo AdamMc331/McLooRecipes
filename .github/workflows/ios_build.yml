@@ -32,17 +32,12 @@ jobs:
         run: |
           echo "$GOOGLE_SERVICES_SECRET" > ./iosApp/mclooRecipesIOS/GoogleService-Info.plist
 
-      # Resolve + build SPM deps before Gradle needs to link against them
-      - name: Resolve and build SPM dependencies
+      # Resolve SPM deps before Gradle needs to link against them
+      - name: Resolve  SPM dependencies
         run: |
           xcodebuild -resolvePackageDependencies \
             -project iosApp/mclooRecipesIOS.xcodeproj \
             -scheme mclooRecipesIOS
-          xcodebuild build \
-            -project iosApp/mclooRecipesIOS.xcodeproj \
-            -scheme mclooRecipesIOS \
-            -destination "generic/platform=iOS Simulator" \
-            CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
 
       - name: Run tests
         run: ./gradlew :shared:iosSimulatorArm64Test
