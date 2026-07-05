@@ -27,14 +27,14 @@ runs:
         cache-read-only: ${{ github.ref != 'refs/heads/development' }}
 
     - name: Recreate google-services.json
-      uses: none
+      shell: bash
       env:
         GOOGLE_SERVICES_SECRET: ${{ inputs.google_services_json }}
       run: |
         echo "$GOOGLE_SERVICES_SECRET" > ./androidApp/google-services.json
 
     - name: Recreate GoogleService-Info.plist
-      uses: none
+      shell: bash
       env:
         GOOGLE_SERVICES_SECRET: ${{ inputs.google_services_plist }}
       run: |
