@@ -26,6 +26,7 @@ class DebugRecipeRepository : RecipeRepository {
                 "Place on cold saucepan skin side down for 15 minutes, until crispy",
                 "Flip and cook until done, 165 degrees",
             ),
+            imageUrl = null,
         ),
         Recipe(
             id = "lobster",
@@ -52,6 +53,7 @@ class DebugRecipeRepository : RecipeRepository {
                 "Add eggs - do not stir, but mix softly to seal in sauce",
                 "Top with green onions and serve over rice",
             ),
+            imageUrl = null,
         ),
     )
 

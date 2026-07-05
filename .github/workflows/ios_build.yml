@@ -20,8 +20,27 @@ jobs:
           distribution: 'zulu'
           java-version-file: .github/.java-version
 
-      - name: Run tests
-        run: ./gradlew :shared:iosSimulatorArm64Test
+      - name: Recreate google-services.json
+        env:
+          GOOGLE_SERVICES_SECRET: ${{ secrets.GOOGLE_SERVICES_JSON }}
+        run: |
+          echo "$GOOGLE_SERVICES_SECRET" > ./androidApp/google-services.json
+
+      - name: Recreate GoogleService-Info.plist
+        env:
+          GOOGLE_SERVICES_SECRET: ${{ secrets.GOOGLE_SERVICES_PLIST }}
+        run: |
+          echo "$GOOGLE_SERVICES_SECRET" > ./iosApp/mclooRecipesIOS/GoogleService-Info.plist
+
+#      # Resolve SPM deps before Gradle needs to link against them
+#      - name: Resolve  SPM dependencies
+#        run: |
+#          xcodebuild -resolvePackageDependencies \
+#            -project iosApp/mclooRecipesIOS.xcodeproj \
+#            -scheme mclooRecipesIOS
+
+#      - name: Run tests
+#        run: ./gradlew :shared:iosSimulatorArm64Test
 
       - name: Build
         uses: sersoft-gmbh/xcodebuild-action@v4

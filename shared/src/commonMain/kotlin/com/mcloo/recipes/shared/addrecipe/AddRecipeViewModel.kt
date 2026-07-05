@@ -125,6 +125,7 @@ class AddRecipeViewModel(
             instructions = state.value.instructions.text
                 .split("\n"),
             tags = emptyList(),
+            imageUrl = null,
         )
     }
 }
