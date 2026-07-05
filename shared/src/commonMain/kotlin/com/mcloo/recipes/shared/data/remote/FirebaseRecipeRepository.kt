@@ -16,12 +16,16 @@ class FirebaseRecipeRepository : RecipeRepository {
     }
 
     override fun getRecipes(query: String): Flow<List<Recipe>> {
-        return recipeCollection().snapshots.map { query ->
-            query.documents
+        return recipeCollection().snapshots.map { q ->
+            q.documents
                 .map { document ->
                     document.data<FirebaseRecipe>().copy(
                         id = document.id,
                     )
+                }.filter { recipe ->
+                    recipe.name.contains(query, ignoreCase = true) || recipe.ingredients.any { ingredient ->
+                        ingredient.contains(query, ignoreCase = true)
+                    }
                 }.map(FirebaseRecipe::toRecipe)
         }
     }
