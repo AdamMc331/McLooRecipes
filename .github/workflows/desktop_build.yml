@@ -12,8 +12,6 @@ jobs:
   android-build:
     runs-on: macos-14
     steps:
-      - uses: actions/checkout@v6
-
       - name: Setup
         uses: ./.github/actions/workflow_setup
         with:

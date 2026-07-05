@@ -12,8 +12,6 @@ jobs:
   ios-build:
     runs-on: macos-26
     steps:
-      - uses: actions/checkout@v6
-
       - name: Setup
         uses: ./.github/actions/workflow_setup
         with:
