@@ -27,6 +27,8 @@ fun RecipeDetailContent(
     state: RecipeDetailUiState,
     modifier: Modifier = Modifier,
 ) {
+    val recipe = state.recipe ?: return
+
     Surface(
         modifier = modifier
             .fillMaxSize(),
@@ -36,7 +38,7 @@ fun RecipeDetailContent(
                 .verticalScroll(rememberScrollState()),
         ) {
             Image(
-                state = state,
+                recipe = recipe,
                 modifier = Modifier
                     .aspectRatio(2F),
             )
@@ -47,15 +49,15 @@ fun RecipeDetailContent(
                     .padding(16.dp),
             ) {
                 NameDuration(
-                    state = state,
+                    recipe = recipe,
                 )
 
                 Ingredients(
-                    state = state,
+                    recipe = recipe,
                 )
 
                 Instructions(
-                    state = state,
+                    recipe = recipe,
                 )
             }
         }
@@ -64,19 +66,19 @@ fun RecipeDetailContent(
 
 @Composable
 private fun NameDuration(
-    state: RecipeDetailUiState,
+    recipe: RecipeDisplayModel,
     modifier: Modifier = Modifier,
 ) {
     Column(
         modifier = modifier,
     ) {
         Text(
-            text = state.recipe.name,
+            text = recipe.name,
             style = MaterialTheme.typography.displaySmall,
         )
 
         InlineIconText(
-            text = state.recipe.duration,
+            text = recipe.duration,
             icon = Icons.Default.History,
             style = MaterialTheme.typography.bodyMedium,
             modifier = Modifier
@@ -87,11 +89,11 @@ private fun NameDuration(
 
 @Composable
 private fun Image(
-    state: RecipeDetailUiState,
+    recipe: RecipeDisplayModel,
     modifier: Modifier = Modifier,
 ) {
     ImageWrapper(
-        image = state.recipe.image,
+        image = recipe.image,
         contentDescription = null,
         modifier = modifier,
     )
@@ -99,11 +101,11 @@ private fun Image(
 
 @Composable
 private fun Ingredients(
-    state: RecipeDetailUiState,
+    recipe: RecipeDisplayModel,
     modifier: Modifier = Modifier,
 ) {
     IngredientsListCard(
-        ingredients = state.recipe.ingredients,
+        ingredients = recipe.ingredients,
         onCopyClick = {},
         modifier = modifier,
     )
@@ -111,11 +113,11 @@ private fun Ingredients(
 
 @Composable
 private fun Instructions(
-    state: RecipeDetailUiState,
+    recipe: RecipeDisplayModel,
     modifier: Modifier = Modifier,
 ) {
     InstructionsListCard(
-        instructions = state.recipe.instructions,
+        instructions = recipe.instructions,
         modifier = modifier,
     )
 }

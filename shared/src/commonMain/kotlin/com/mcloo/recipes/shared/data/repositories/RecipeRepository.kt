@@ -4,6 +4,10 @@ import com.mcloo.recipes.shared.models.Recipe
 import kotlinx.coroutines.flow.Flow
 
 interface RecipeRepository {
+    fun getRecipe(
+        id: String,
+    ): Flow<Recipe>
+
     fun getRecipes(
         query: String,
     ): Flow<List<Recipe>>
