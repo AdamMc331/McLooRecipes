@@ -16,23 +16,25 @@ class FirebaseRecipeRepository : RecipeRepository {
     }
 
     override fun getRecipes(query: String): Flow<List<Recipe>> {
-        return recipeCollection().snapshots.map { q ->
-            q.documents
+        return recipeCollection().snapshots.map { querySnapshot ->
+            querySnapshot.documents
                 .map { document ->
-                    document.data<FirebaseRecipe>().copy(
-                        id = document.id,
-                    )
+                    document.data<FirebaseRecipe>().toRecipe(document.id)
                 }.filter { recipe ->
                     recipe.name.contains(query, ignoreCase = true) || recipe.ingredients.any { ingredient ->
                         ingredient.contains(query, ignoreCase = true)
                     }
-                }.map(FirebaseRecipe::toRecipe)
+                }
         }
     }
 
     override suspend fun saveRecipe(recipe: Recipe) {
+        val documentId = recipe.id.ifEmpty {
+            recipeCollection().document.id
+        }
+
         val firebaseRecipe = FirebaseRecipe(recipe)
 
-        recipeCollection().document(firebaseRecipe.id).set(firebaseRecipe)
+        recipeCollection().document(documentId).set(firebaseRecipe)
     }
 }

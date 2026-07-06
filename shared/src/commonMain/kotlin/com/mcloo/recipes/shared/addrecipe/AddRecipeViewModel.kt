@@ -117,7 +117,7 @@ class AddRecipeViewModel(
 
     private fun buildRecipe(): Recipe {
         return Recipe(
-            id = state.value.name.text, // Replace this?
+            id = "",
             name = state.value.name.text,
             duration = state.value.duration.text,
             ingredients = state.value.ingredients.text
