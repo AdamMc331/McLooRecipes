@@ -10,7 +10,6 @@ import kotlinx.serialization.Serializable
  */
 @Serializable
 data class FirebaseRecipe(
-    val id: String,
     val name: String,
     val imageUrl: String?,
     val ingredients: List<String>,
@@ -19,7 +18,6 @@ data class FirebaseRecipe(
     val duration: String?,
 ) {
     constructor(recipe: Recipe) : this(
-        id = recipe.id,
         name = recipe.name,
         imageUrl = recipe.imageUrl,
         ingredients = recipe.ingredients,
@@ -28,9 +26,11 @@ data class FirebaseRecipe(
         duration = recipe.duration,
     )
 
-    fun toRecipe(): Recipe {
+    fun toRecipe(
+        documentId: String,
+    ): Recipe {
         return Recipe(
-            id = this.id,
+            id = documentId,
             name = this.name,
             duration = this.duration.orEmpty(),
             tags = this.tags,

@@ -63,7 +63,7 @@ fun AppNavHost(
                         AddRecipeScreen(
                             viewModel = viewModel {
                                 AddRecipeViewModel(
-                                    recipeRepository = DebugRecipeRepository(),
+                                    recipeRepository = FirebaseRecipeRepository(),
                                 )
                             },
                             onComplete = {
