@@ -5,15 +5,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
+import org.koin.compose.viewmodel.koinViewModel
 
 const val RECIPE_LIST_SCREEN_TAG = "RecipeListScreen"
 
 @Composable
 fun RecipeListScreen(
-    viewModel: RecipeListViewModel,
     navigateToAddRecipe: () -> Unit,
     navigateToRecipeDetail: (String) -> Unit,
     modifier: Modifier = Modifier,
+    viewModel: RecipeListViewModel = koinViewModel(),
 ) {
     val state = viewModel.state.collectAsState()
 

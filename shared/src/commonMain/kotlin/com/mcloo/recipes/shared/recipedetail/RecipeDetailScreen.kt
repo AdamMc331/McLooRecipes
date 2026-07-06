@@ -1,16 +1,21 @@
 package com.mcloo.recipes.shared.recipedetail
 
-import androidx.compose.foundation.layout.statusBarsPadding
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
-import com.mcloo.recipes.shared.displaymodels.RecipeDisplayModel
+import org.koin.compose.viewmodel.koinViewModel
+import org.koin.core.parameter.parametersOf
 
 @Composable
 fun RecipeDetailScreen(
-    viewModel: RecipeDetailViewModel,
+    recipeId: String,
     modifier: Modifier = Modifier,
+    viewModel: RecipeDetailViewModel = koinViewModel(
+        key = "RecipeDetailVm_$recipeId",
+        parameters = {
+            parametersOf(recipeId)
+        },
+    ),
 ) {
     val state = viewModel.state.collectAsState()
 
