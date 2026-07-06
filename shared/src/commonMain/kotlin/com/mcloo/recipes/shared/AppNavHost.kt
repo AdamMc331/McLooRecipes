@@ -74,23 +74,13 @@ fun AppNavHost(
 @Composable
 private fun RecipeDetailEntry(key: Route.RecipeDetail) {
     RecipeDetailScreen(
-        viewModel {
-            RecipeDetailViewModel(
-                recipeId = key.id,
-                recipeRepository = FirebaseRecipeRepository(),
-            )
-        },
+        recipeId = key.id,
     )
 }
 
 @Composable
 private fun AddRecipeEntry(backStack: NavBackStack<NavKey>) {
     AddRecipeScreen(
-        viewModel = viewModel {
-            AddRecipeViewModel(
-                recipeRepository = FirebaseRecipeRepository(),
-            )
-        },
         onComplete = {
             if (backStack.isNotEmpty()) {
                 backStack.removeAt(backStack.size - 1)
@@ -102,11 +92,6 @@ private fun AddRecipeEntry(backStack: NavBackStack<NavKey>) {
 @Composable
 private fun RecipeListEntry(backStack: NavBackStack<NavKey>) {
     RecipeListScreen(
-        viewModel = viewModel {
-            RecipeListViewModel(
-                repository = FirebaseRecipeRepository(),
-            )
-        },
         navigateToAddRecipe = {
             backStack.add(Route.AddRecipe)
         },

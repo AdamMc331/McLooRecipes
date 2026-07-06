@@ -16,7 +16,7 @@ import kotlinx.coroutines.flow.stateIn
 
 @OptIn(ExperimentalCoroutinesApi::class)
 class RecipeListViewModel(
-    private val repository: RecipeRepository,
+    private val recipeRepository: RecipeRepository,
 ) : ViewModel() {
     private val searchText = MutableStateFlow(TextFieldValue())
 
@@ -24,7 +24,7 @@ class RecipeListViewModel(
         .map { it.text }
         .distinctUntilChanged()
         .flatMapLatest { query ->
-            repository.getRecipes(query)
+            recipeRepository.getRecipes(query)
         }.map { recipes ->
             recipes.map(::RecipeDisplayModel)
         }
