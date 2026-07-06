@@ -11,9 +11,9 @@ import androidx.navigation3.ui.NavDisplay
 import androidx.savedstate.serialization.SavedStateConfiguration
 import com.mcloo.recipes.shared.addrecipe.AddRecipeScreen
 import com.mcloo.recipes.shared.addrecipe.AddRecipeViewModel
-import com.mcloo.recipes.shared.data.DebugRecipeRepository
 import com.mcloo.recipes.shared.data.remote.FirebaseRecipeRepository
 import com.mcloo.recipes.shared.recipedetail.RecipeDetailScreen
+import com.mcloo.recipes.shared.recipedetail.RecipeDetailViewModel
 import com.mcloo.recipes.shared.recipelist.RecipeListScreen
 import com.mcloo.recipes.shared.recipelist.RecipeListViewModel
 import kotlinx.serialization.modules.SerializersModule
@@ -78,7 +78,12 @@ fun AppNavHost(
                 is Route.RecipeDetail -> {
                     NavEntry(key) {
                         RecipeDetailScreen(
-                            id = key.id,
+                            viewModel {
+                                RecipeDetailViewModel(
+                                    recipeId = key.id,
+                                    recipeRepository = FirebaseRecipeRepository(),
+                                )
+                            },
                         )
                     }
                 }
