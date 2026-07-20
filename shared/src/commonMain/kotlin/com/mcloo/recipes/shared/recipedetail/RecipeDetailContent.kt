@@ -14,12 +14,15 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.mcloo.recipes.shared.displaymodels.RecipeDisplayModel
 import com.mcloo.recipes.shared.ui.UiImage
 import com.mcloo.recipes.shared.ui.components.ImageWrapper
 import com.mcloo.recipes.shared.ui.components.InlineIconText
+import com.mcloo.recipes.shared.ui.sharedBounds
+import com.mcloo.recipes.shared.ui.sharedElement
 import com.mcloo.recipes.shared.ui.theme.McLooTheme
 
 @Composable
@@ -75,6 +78,8 @@ private fun NameDuration(
         Text(
             text = recipe.name,
             style = MaterialTheme.typography.displaySmall,
+            modifier = Modifier
+                .sharedBounds(recipe.nameSharedElementKey),
         )
 
         InlineIconText(
@@ -82,7 +87,8 @@ private fun NameDuration(
             icon = Icons.Default.History,
             style = MaterialTheme.typography.bodyMedium,
             modifier = Modifier
-                .padding(top = 4.dp),
+                .padding(top = 4.dp)
+                .sharedBounds(recipe.durationSharedElementKey),
         )
     }
 }
@@ -95,7 +101,9 @@ private fun Image(
     ImageWrapper(
         image = recipe.image,
         contentDescription = null,
-        modifier = modifier,
+        contentScale = ContentScale.Crop,
+        modifier = modifier
+            .sharedElement(recipe.imageSharedElementKey),
     )
 }
 

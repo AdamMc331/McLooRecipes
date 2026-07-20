@@ -25,4 +25,10 @@ data class RecipeDisplayModel(
             UiImage.Placeholder
         },
     )
+
+    val imageSharedElementKey = "RecipeImage_$id"
+
+    val nameSharedElementKey = "RecipeTitle_$id"
+
+    val durationSharedElementKey = "RecipeDuration_$id"
 }

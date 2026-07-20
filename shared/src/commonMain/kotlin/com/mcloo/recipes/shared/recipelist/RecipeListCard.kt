@@ -25,6 +25,8 @@ import com.mcloo.recipes.shared.displaymodels.RecipeDisplayModel
 import com.mcloo.recipes.shared.ui.UiImage
 import com.mcloo.recipes.shared.ui.components.ImageWrapper
 import com.mcloo.recipes.shared.ui.components.InlineIconText
+import com.mcloo.recipes.shared.ui.sharedBounds
+import com.mcloo.recipes.shared.ui.sharedElement
 import com.mcloo.recipes.shared.ui.theme.McLooTheme
 
 @Composable
@@ -46,7 +48,8 @@ fun RecipeListCard(
                 contentDescription = null,
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
-                    .size(72.dp),
+                    .size(72.dp)
+                    .sharedElement(recipe.imageSharedElementKey),
             )
 
             Column(
@@ -56,6 +59,8 @@ fun RecipeListCard(
                 Text(
                     text = recipe.name,
                     style = MaterialTheme.typography.titleSmall,
+                    modifier = Modifier
+                        .sharedBounds(recipe.nameSharedElementKey),
                 )
 
                 InlineIconText(
@@ -63,7 +68,8 @@ fun RecipeListCard(
                     icon = Icons.Default.History,
                     style = MaterialTheme.typography.labelMedium,
                     modifier = Modifier
-                        .padding(top = 4.dp),
+                        .padding(top = 4.dp)
+                        .sharedBounds(recipe.durationSharedElementKey),
                 )
             }
         }
