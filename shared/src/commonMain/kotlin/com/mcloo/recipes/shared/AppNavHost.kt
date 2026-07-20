@@ -2,12 +2,14 @@ package com.mcloo.recipes.shared
 
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation3.runtime.NavBackStack
 import androidx.navigation3.runtime.NavEntry
 import androidx.navigation3.runtime.NavKey
 import androidx.navigation3.runtime.rememberNavBackStack
+import androidx.navigation3.ui.LocalNavAnimatedContentScope
 import androidx.navigation3.ui.NavDisplay
 import androidx.savedstate.serialization.SavedStateConfiguration
 import com.mcloo.recipes.shared.addrecipe.AddRecipeScreen
@@ -17,6 +19,7 @@ import com.mcloo.recipes.shared.recipedetail.RecipeDetailScreen
 import com.mcloo.recipes.shared.recipedetail.RecipeDetailViewModel
 import com.mcloo.recipes.shared.recipelist.RecipeListScreen
 import com.mcloo.recipes.shared.recipelist.RecipeListViewModel
+import com.mcloo.recipes.shared.ui.LocalNavAnimatedVisibilityScope
 import kotlinx.serialization.modules.SerializersModule
 import kotlinx.serialization.modules.polymorphic
 
@@ -73,30 +76,42 @@ fun AppNavHost(
 
 @Composable
 private fun RecipeDetailEntry(key: Route.RecipeDetail) {
-    RecipeDetailScreen(
-        recipeId = key.id,
-    )
+    CompositionLocalProvider(
+        LocalNavAnimatedVisibilityScope provides LocalNavAnimatedContentScope.current,
+    ) {
+        RecipeDetailScreen(
+            recipeId = key.id,
+        )
+    }
 }
 
 @Composable
 private fun AddRecipeEntry(backStack: NavBackStack<NavKey>) {
-    AddRecipeScreen(
-        onComplete = {
-            if (backStack.isNotEmpty()) {
-                backStack.removeAt(backStack.size - 1)
-            }
-        },
-    )
+    CompositionLocalProvider(
+        LocalNavAnimatedVisibilityScope provides LocalNavAnimatedContentScope.current,
+    ) {
+        AddRecipeScreen(
+            onComplete = {
+                if (backStack.isNotEmpty()) {
+                    backStack.removeAt(backStack.size - 1)
+                }
+            },
+        )
+    }
 }
 
 @Composable
 private fun RecipeListEntry(backStack: NavBackStack<NavKey>) {
-    RecipeListScreen(
-        navigateToAddRecipe = {
-            backStack.add(Route.AddRecipe)
-        },
-        navigateToRecipeDetail = { id ->
-            backStack.add(Route.RecipeDetail(id = id))
-        },
-    )
+    CompositionLocalProvider(
+        LocalNavAnimatedVisibilityScope provides LocalNavAnimatedContentScope.current,
+    ) {
+        RecipeListScreen(
+            navigateToAddRecipe = {
+                backStack.add(Route.AddRecipe)
+            },
+            navigateToRecipeDetail = { id ->
+                backStack.add(Route.RecipeDetail(id = id))
+            },
+        )
+    }
 }
