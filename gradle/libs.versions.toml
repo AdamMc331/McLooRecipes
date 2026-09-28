@@ -28,7 +28,7 @@ material3Adaptive = "1.2.0"
 materialIconsExtended = "1.7.3"
 minSdk = "23"
 nav3 = "1.1.2"
-testParameterInjector = "1.23"
+testParameterInjector = "1.24"
 
 [libraries]
 android-firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebase-bom" }
